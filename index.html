@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>valentine · romantic music · flying emojis · typing letter</title>
+  <title>happy valentine · love letter · typing message · with photo</title>
   <style>
     /* ===== RESET & GLOBAL ===== */
     * {
@@ -31,7 +31,7 @@
       transition: opacity 1.2s ease-in-out;
       opacity: 0;
       pointer-events: none;
-      -webkit-overflow-scrolling: touch;
+      -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
     }
 
     .page.active {
@@ -40,6 +40,7 @@
       z-index: 10;
     }
 
+    
     /* ===== FLYING EMOJI CONTAINER ===== */
     #flyingEmojiContainer {
       position: fixed;
@@ -133,6 +134,7 @@
       }
     }
 
+    /* main content */
     .valentine-card {
       position: relative;
       top: 50%;
@@ -145,16 +147,16 @@
       background: rgba(255, 245, 250, 0.3);
       backdrop-filter: blur(5px);
       border-radius: 60px 20px 60px 20px;
-      padding: 2rem 2rem 3rem;
+      padding: clamp(1.5rem, 5vw, 2rem) clamp(1rem, 4vw, 2rem) clamp(2rem, 6vw, 3rem);
       box-shadow: 0 20px 40px rgba(255, 20, 100, 0.3), 0 0 0 4px rgba(255, 255, 255, 0.5) inset, 0 0 40px #ffa5c3;
       border: 1px solid rgba(255, 255, 255, 0.8);
     }
 
-    /* Photo frame styles */
+    /* ===== PHOTO CONTAINER STYLE 1 – Polaroid style on page 1 ===== */
     .photo-frame {
       margin: 2rem auto 1.5rem;
-      width: min(220px, 50vw);
-      height: min(240px, 55vw);
+      width: min(220px, 60vw);
+      height: min(240px, 65vw);
       background: white;
       padding: 12px 12px 35px 12px;
       box-shadow: 0 15px 25px rgba(0,0,0,0.2), 0 0 0 2px #ffb6c1, 0 0 0 5px white;
@@ -186,6 +188,19 @@
       letter-spacing: 1px;
     }
 
+    /* default placeholder if no image */
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, #ffdbeb, #ffb3cc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: #ff4d7a;
+      border-radius: 5px;
+    }
+
     .main-message {
       font-size: clamp(2.5rem, 8vw, 4rem);
       font-family: 'Dancing Script', 'Great Vibes', cursive;
@@ -210,17 +225,17 @@
       color: #5e1e36;
       background: rgba(255, 220, 240, 0.6);
       display: inline-block;
-      padding: 0.5rem 2rem;
+      padding: 0.5rem clamp(1rem, 4vw, 2rem);
       border-radius: 40px;
       backdrop-filter: blur(4px);
+      letter-spacing: 1px;
       max-width: 90%;
     }
 
-    /* ===== BUTTON MORE VISIBLE ON DESKTOP ===== */
     .btn-open {
       background: linear-gradient(145deg, #ff99bb, #ff4d7a);
       border: none;
-      padding: 1.2rem 3.5rem;
+      padding: clamp(0.8rem, 3vw, 1.2rem) clamp(2rem, 6vw, 3.5rem);
       font-size: clamp(1.5rem, 5vw, 2rem);
       font-family: 'Dancing Script', cursive;
       font-weight: 600;
@@ -233,12 +248,6 @@
       transition: all 0.2s ease;
       width: auto;
       max-width: 90%;
-      /* enhanced visibility for desktop */
-      outline: 4px solid rgba(255, 255, 255, 0.9);
-      outline-offset: 2px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
     .btn-open:hover {
@@ -251,94 +260,6 @@
       box-shadow: 0 5px 0 #a1284a;
     }
 
-    /* Thumbnails - now with interactive flying effects */
-    .photo-thumbnails {
-      display: flex;
-      gap: clamp(1rem, 3vw, 1.5rem);
-      justify-content: center;
-      flex-wrap: wrap;
-      margin: 2rem 0 0;
-      position: absolute;
-      bottom: clamp(10px, 3vh, 30px);
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 30;
-      width: 100%;
-      padding: 0 10px;
-    }
-
-    .thumb-frame {
-      width: clamp(70px, 15vw, 90px);
-      height: clamp(70px, 15vw, 90px);
-      border-radius: 50%;
-      background: white;
-      padding: 8px;
-      box-shadow: 0 8px 20px #ff99bb;
-      cursor: pointer;
-      transition: all 0.3s;
-      border: 3px solid #ffb3cc;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .thumb-frame:hover {
-      transform: scale(1.2) rotate(5deg);
-      box-shadow: 0 15px 30px #ff4d7a;
-      border-color: #ff4d7a;
-    }
-
-    .thumb-frame:active {
-      transform: scale(0.95);
-    }
-
-    .thumb-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-
-    .thumb-placeholder {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: linear-gradient(145deg, #ffccdd, #ff99bb);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: clamp(1.8rem, 5vw, 2.5rem);
-      transition: all 0.3s;
-    }
-
-    .thumb-frame:hover .thumb-placeholder {
-      transform: scale(1.1);
-    }
-
-    /* Tooltip for flying effect */
-    .thumb-frame::after {
-      content: attr(data-effect);
-      position: absolute;
-      bottom: -30px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(255, 255, 255, 0.9);
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: clamp(0.7rem, 2vw, 1rem);
-      color: #a02b4e;
-      white-space: nowrap;
-      opacity: 0;
-      transition: 0.3s;
-      pointer-events: none;
-      border: 1px solid #ff99bb;
-      font-family: 'Dancing Script', cursive;
-    }
-
-    .thumb-frame:hover::after {
-      opacity: 1;
-      bottom: -40px;
-    }
-
     /* ===== PAGE 2 – LOVE LETTER with TYPING EFFECT ===== */
     #page2 {
       background: #fff0f5;
@@ -348,7 +269,7 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      padding: 1rem;
+      padding: clamp(1rem, 4vw, 2rem);
     }
 
     .letter-container {
@@ -388,7 +309,7 @@
       font-size: clamp(1.2rem, 4vw, 1.6rem);
       line-height: 1.6;
       color: #4f2439;
-      min-height: min(280px, 40vh);
+      min-height: 200px;
       position: relative;
       margin: 1.5rem 0;
       white-space: pre-wrap;
@@ -416,9 +337,19 @@
       51%, 100% { opacity: 0; }
     }
 
+    /* ===== PHOTO CONTAINER STYLE 2 – Vintage heart frame on page 2 ===== */
+    .photo-side {
+      flex: 1;
+      min-width: min(250px, 80%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
     .heart-photo-frame {
-      width: clamp(220px, 50vw, 280px);
-      height: clamp(220px, 50vw, 280px);
+      width: min(280px, 70vw);
+      height: min(280px, 70vw);
       background: #ffe2f0;
       border-radius: 50% 50% 45% 45%;
       padding: 15px;
@@ -429,7 +360,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto;
     }
 
     .heart-photo-frame:hover {
@@ -453,17 +383,60 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: clamp(2rem, 8vw, 4rem);
+      font-size: clamp(2.5rem, 10vw, 4rem);
       color: white;
       border: 3px solid white;
-      overflow: hidden;
     }
-    
-    .heart-placeholder img {
+
+    /* ===== PHOTO CONTAINER STYLE 3 – Small carousel/thumbs at bottom ===== */
+    .photo-thumbnails {
+      display: flex;
+      gap: clamp(0.8rem, 3vw, 1rem);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 2rem 0 0;
+      position: absolute;
+      bottom: clamp(10px, 3vh, 20px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      width: 100%;
+      padding: 0 10px;
+    }
+
+    .thumb-frame {
+      width: clamp(60px, 15vw, 80px);
+      height: clamp(60px, 15vw, 80px);
+      border-radius: 50%;
+      background: white;
+      padding: 5px;
+      box-shadow: 0 5px 15px #ff99bb;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid #ffb3cc;
+    }
+
+    .thumb-frame:hover {
+      transform: scale(1.2);
+      box-shadow: 0 8px 20px #ff4d7a;
+    }
+
+    .thumb-frame img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 50% 50% 45% 45%;
+      border-radius: 50%;
+    }
+
+    .thumb-placeholder {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #ffccdd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(1.4rem, 5vw, 1.8rem);
     }
 
     .letter-paper h2 {
@@ -504,12 +477,13 @@
       transform: translateY(-5px);
       box-shadow: 0 13px 0 #bc6f8f;
     }
-    
+
     .btn-back:active {
       transform: translateY(5px);
       box-shadow: 0 3px 0 #bc6f8f;
     }
 
+    /* decorative elements */
     .deco-heart {
       position: absolute;
       color: #ff8db3;
@@ -525,58 +499,104 @@
 
     /* Mobile specific adjustments */
     @media (max-width: 768px) {
-      .valentine-card {
-        padding: 1.5rem 1rem 2rem;
-        width: 95%;
+      .main-message { 
+        font-size: clamp(2rem, 7vw, 3rem); 
       }
-      
-      .photo-frame {
-        margin: 1rem auto;
+      .letter-container { 
+        flex-direction: column; 
       }
-      
-      .thumb-frame::after {
-        display: none; /* Hide tooltips on mobile for better touch experience */
+      .photo-frame { 
+        width: min(180px, 50vw); 
+        height: min(200px, 55vw); 
       }
-      
-      .letter-container {
-        flex-direction: column;
+      .heart-photo-frame::after,
+      .photo-frame::after {
+        display: none; /* hide tooltips on small screens for cleaner look */
       }
-      
-      .photo-side {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .btn-back {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-      }
-    }
-    
-    /* Small phone adjustments */
-    @media (max-width: 480px) {
-      .thumb-frame {
-        width: 60px;
-        height: 60px;
-      }
-      
       .photo-thumbnails {
-        gap: 0.8rem;
         bottom: 10px;
       }
-      
-      .typing-message {
-        padding: 1rem;
-        min-height: 200px;
+    }
+
+    @media (max-width: 480px) {
+      .thumb-frame {
+        width: 50px;
+        height: 50px;
+      }
+      .thumb-placeholder {
+        font-size: 1.2rem;
+      }
+      .btn-open {
+        padding: 0.7rem 1.5rem;
+      }
+    }
+
+    /* additional styles for photo spots */
+    #page1Photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    .photo-frame, .heart-photo-frame, .thumb-frame {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .photo-frame:hover .photo-caption {
+      color: #ff165d;
+    }
+    /* instructions overlay (subtle) */
+    .photo-frame::after {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.8rem;
+      background: rgba(255,255,255,0.7);
+      padding: 2px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: 0.3s;
+      pointer-events: none;
+    }
+    .photo-frame:hover::after {
+      opacity: 1;
+      bottom: -25px;
+    }
+    .heart-photo-frame {
+      position: relative;
+    }
+    .heart-photo-frame::after {
+      position: absolute;
+      bottom: -20px;
+      font-size: 1rem;
+      background: white;
+      padding: 2px 12px;
+      border-radius: 20px;
+      opacity: 0;
+      transition: 0.3s;
+    }
+    .heart-photo-frame:hover::after {
+      opacity: 0.9;
+      bottom: -25px;
+    }
+
+    /* ensure thumbnails container doesn't overlap on very small screens */
+    @media (max-height: 600px) {
+      .photo-thumbnails {
+        bottom: 5px;
+      }
+      .valentine-card {
+        padding-bottom: 1rem;
       }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
-<body>
-  <!-- HIDDEN AUDIO FOR AUTOPLAY (NO VISIBLE BUTTON) -->
+<body> 
+    
+    <!-- HIDDEN AUDIO FOR AUTOPLAY (NO VISIBLE BUTTON) -->
   <audio id="bgMusic" loop preload="auto" style="display: none;">
     <source src="Mooskaan - Sajjan Raj Vaidya (youtube).mp3" type="audio/mpeg">
     <!-- This is a royalty-free romantic melody that will autoplay -->
@@ -590,20 +610,18 @@ window.onload = function () {
 };
 </script>
 
-  <!-- FLYING EMOJI CONTAINER -->
-  <div id="flyingEmojiContainer"></div>
 
-  <!-- PAGE 1 – LANDING -->
+<!-- PAGE 1 – LANDING with PHOTO SPOT 1 -->
   <div id="page1" class="page active">
     <div id="float-container"></div>
     
     <div class="valentine-card">
-      <div class="main-message">Happy Valentine’s Day sadhana❤️😘🫂</div>
+      <div class="main-message">Happy Valentine’s Day sanu😘</div>
       
-      <!-- PHOTO SPOT 1 – Main polaroid -->
+      <!-- PHOTO SPOT 1 – Main polaroid frame -->
       <div class="photo-frame" id="photoSpot1" onclick="triggerPhotoUpload(1)">
-        <img id="page1Photo" src="1769434104945.png"
-             alt="Your Valentine photo">
+        <!-- Default placeholder – replace with your image -->
+        <img id="page1Photo" src="1769434104945.png">
         <div class="photo-caption">you & me ❤️</div>
       </div>
       
@@ -611,26 +629,27 @@ window.onload = function () {
       <button class="btn-open" id="openLetterBtn">💌 Open My Love Letter 💌</button>
     </div>
 
-    <!-- Thumbnails with flying effects -->
+
+     <!-- Thumbnails with flying effects -->
     <div class="photo-thumbnails">
       <!-- ❤️ Button - flies hearts -->
-      <div class="thumb-frame" id="heartBtn" onclick="triggerFlyingEmojis('❤️', 25)" data-effect="❤️ flies everywhere">
+      <div class="thumb-frame" id="heartBtn" onclick="triggerFlyingEmojis('❤️', 30)" data-effect="❤️ flies everywhere">
         <div class="thumb-placeholder">❤️</div>
       </div>
       
       <!-- 💕 Button - flies 😘 kisses -->
-      <div class="thumb-frame" id="kissBtn" onclick="triggerFlyingEmojis('😘', 25)" data-effect="😘 kisses fly">
+      <div class="thumb-frame" id="kissBtn" onclick="triggerFlyingEmojis('😘', 30)" data-effect="😘 kisses fly">
         <div class="thumb-placeholder">💕</div>
       </div>
       
       <!-- 🌹 Button - flies roses -->
-      <div class="thumb-frame" id="roseBtn" onclick="triggerFlyingEmojis('🌹', 20)" data-effect="🌹 roses everywhere">
+      <div class="thumb-frame" id="roseBtn" onclick="triggerFlyingEmojis('🌹', 45)" data-effect="🌹 roses everywhere">
         <div class="thumb-placeholder">🌹</div>
       </div>
     </div>
   </div>
 
-  <!-- PAGE 2 – LOVE LETTER with AUTO TYPING MESSAGE -->
+  <!-- PAGE 2 – LOVE LETTER with TYPING MESSAGE and PHOTO SPOT 2 -->
   <div id="page2" class="page">
     <div style="position: absolute; width: 100%; height: 100%; pointer-events: none;">
       <span class="deco-heart" style="top: 10%; left: 5%;">❤️</span>
@@ -639,24 +658,23 @@ window.onload = function () {
     </div>
     
     <div class="letter-container">
-      <!-- Letter paper with AUTO TYPING EFFECT -->
+      <!-- Letter paper with TYPING EFFECT -->
       <div class="letter-paper">
-        <h2>To my dearest Valentine Sadhana 💕</h2>
+        <h2>To my dearest Valentine Sadhana</h2>
         
         <!-- TYPING MESSAGE CONTAINER -->
         <div class="typing-message" id="typingMessage">
           <span id="messageText"></span><span class="cursor" id="cursor"></span>
         </div>
         
-        <div class="signature" id="signature">All yours miss💋</div>
+        <div class="signature" id="signature">All yours Miss 💋</div>
       </div>
 
-      <!-- PHOTO SPOT 2 – Heart frame -->
+      <!-- PHOTO SPOT 2 – Heart-shaped frame on page 2 -->
       <div class="photo-side">
         <div class="heart-photo-frame" id="photoSpot2" onclick="triggerPhotoUpload(2)">
-          <div class="heart-placeholder" id="page2Heart">
-            <img src="IMG_20260214_120459~2.jpg" alt="" srcset="">
-          </div>
+          <div class="heart-placeholder" id="page2Heart"> 
+            <img src="IMG_20260214_120459~2.jpg" alt="" srcset=""> </div>
         </div>
         <p style="font-family: 'Dancing Script'; font-size: clamp(1.4rem, 4vw, 1.8rem); color: #b32e5a;">my favorite view</p>
       </div>
@@ -703,7 +721,124 @@ window.onload = function () {
         setTimeout(attemptAutoplay, 500); // Small delay for better browser compatibility
       });
 
-      // ===== FLYING EMOJI FUNCTION =====
+      // ===== FLOATING HEARTS =====
+      const container = document.getElementById('float-container');
+      
+      function createFloatingElement(type = 'heart') {
+        const el = document.createElement('div');
+        if (type === 'heart') {
+          el.className = 'float-heart';
+          const heartSymbols = ['❤️', '🧡', '💛', '💚', '💙', '💜', '🩷', '💖', '💕', '💗'];
+          el.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+          el.style.left = Math.random() * 100 + '%';
+          el.style.animationDuration = 5 + Math.random() * 10 + 's';
+        } else {
+          el.className = 'float-sparkle';
+          el.innerText = '✨';
+          el.style.left = Math.random() * 100 + '%';
+          el.style.animationDuration = 4 + Math.random() * 7 + 's';
+        }
+        el.style.top = Math.random() * 100 + '%';
+        container.appendChild(el);
+        setTimeout(() => { if (el.parentNode) el.remove(); }, 15000);
+      }
+
+      for (let i = 0; i < 25; i++) {
+        createFloatingElement(i % 3 === 0 ? 'sparkle' : 'heart');
+      }
+
+      setInterval(() => {
+        for (let i = 0; i < 3; i++) {
+          createFloatingElement(Math.random() > 0.6 ? 'sparkle' : 'heart');
+        }
+      }, 2000);
+
+      // ===== NAVIGATION =====
+      const page1 = document.getElementById('page1');
+      const page2 = document.getElementById('page2');
+      const openBtn = document.getElementById('openLetterBtn');
+      const backBtn = document.getElementById('backBtn');
+
+      openBtn.addEventListener('click', () => {
+        page1.classList.remove('active');
+        page2.classList.add('active');
+        startTyping(); // Start typing when page 2 opens
+      });
+
+      backBtn.addEventListener('click', () => {
+        page2.classList.remove('active');
+        page1.classList.add('active');
+        pauseTyping(); // Pause typing when leaving page 2
+      });
+
+      // ===== TYPING MESSAGE EFFECT =====
+      const messageText = document.getElementById('messageText');
+      const cursor = document.getElementById('cursor');
+      const signature = document.getElementById('signature');
+      
+      // The romantic message to be typed
+      const fullMessage = `Every moment with you is special💕 and every smile of yours means the world to me 😘😘 Your kindness, your smile, and your presence make my heart happy, every day with you feels special😊 and my heart feels happy when I think of you💕🫂 On this Valentine’s Day, I just want you to know how lucky I feel to have you in my life ❤️🫂😘, I love you sadhana 💖😘  `;
+
+      let currentIndex = 0;
+      let typingInterval = null;
+      let isPage2Active = false;
+
+      function typeNextCharacter() {
+        if (!isPage2Active) return;
+        
+        if (currentIndex < fullMessage.length) {
+          messageText.textContent += fullMessage.charAt(currentIndex);
+          currentIndex++;
+          
+          // Auto-scroll to keep text visible
+          const typingDiv = document.getElementById('typingMessage');
+          typingDiv.scrollTop = typingDiv.scrollHeight;
+        } else {
+          // Message complete - show signature with fade
+          clearInterval(typingInterval);
+          typingInterval = null;
+          cursor.style.opacity = '0'; // Hide cursor when done
+          signature.style.opacity = '1';
+        }
+      }
+
+      function startTyping() {
+        isPage2Active = true;
+        
+        // Don't restart if already at the end
+        if (currentIndex >= fullMessage.length) {
+          signature.style.opacity = '1';
+          cursor.style.opacity = '0';
+          return;
+        }
+        
+        // Clear any existing interval
+        if (typingInterval) {
+          clearInterval(typingInterval);
+        }
+        
+        // Start typing from current position
+        typingInterval = setInterval(typeNextCharacter, 70); // 70ms per character - intimate pace
+        cursor.style.opacity = '1';
+      }
+
+      function pauseTyping() {
+        isPage2Active = false;
+        if (typingInterval) {
+          clearInterval(typingInterval);
+          typingInterval = null;
+        }
+      }
+
+      // Reset typing if needed (optional, but can be used)
+      function resetTyping() {
+        currentIndex = 0;
+        messageText.textContent = '';
+        signature.style.opacity = '0';
+        cursor.style.opacity = '1';
+      }
+
+      // ===== FLYING EMOJI FUNCTIONALITY (ADDED) =====
       const flyingContainer = document.getElementById('flyingEmojiContainer');
       
       window.triggerFlyingEmojis = function(emoji, count) {
@@ -744,111 +879,6 @@ window.onload = function () {
         }, 4000);
       }
 
-      // ===== FLOATING HEARTS =====
-      const floatContainer = document.getElementById('float-container');
-      
-      function createFloatingElement(type = 'heart') {
-        const el = document.createElement('div');
-        if (type === 'heart') {
-          el.className = 'float-heart';
-          const heartSymbols = ['❤️', '🧡', '💛', '💚', '💙', '💜', '🩷', '💖', '💕', '💗'];
-          el.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
-          el.style.left = Math.random() * 100 + '%';
-          el.style.animationDuration = 5 + Math.random() * 10 + 's';
-        } else {
-          el.className = 'float-sparkle';
-          el.innerText = '✨';
-          el.style.left = Math.random() * 100 + '%';
-          el.style.animationDuration = 4 + Math.random() * 7 + 's';
-        }
-        el.style.top = Math.random() * 100 + '%';
-        floatContainer.appendChild(el);
-        setTimeout(() => { if (el.parentNode) el.remove(); }, 15000);
-      }
-
-      // Initial floating elements
-      for (let i = 0; i < 25; i++) {
-        createFloatingElement(i % 3 === 0 ? 'sparkle' : 'heart');
-      }
-
-      // Keep adding new floating elements
-      setInterval(() => {
-        for (let i = 0; i < 3; i++) {
-          createFloatingElement(Math.random() > 0.6 ? 'sparkle' : 'heart');
-        }
-      }, 2000);
-
-      // ===== NAVIGATION =====
-      const page1 = document.getElementById('page1');
-      const page2 = document.getElementById('page2');
-      const openBtn = document.getElementById('openLetterBtn');
-      const backBtn = document.getElementById('backBtn');
-
-      openBtn.addEventListener('click', () => {
-        page1.classList.remove('active');
-        page2.classList.add('active');
-        startTyping();
-      });
-
-      backBtn.addEventListener('click', () => {
-        page2.classList.remove('active');
-        page1.classList.add('active');
-        pauseTyping();
-      });
-
-      // ===== AUTO TYPING MESSAGE EFFECT =====
-      const messageText = document.getElementById('messageText');
-      const cursor = document.getElementById('cursor');
-      const signature = document.getElementById('signature');
-      
-      const fullMessage = `Every moment with you is special💕 and every smile of yours means the world to me 😘😘 Your kindness, your smile, and your presence make my heart happy, every day with you feels special😊 and my heart feels happy when I think of you💕🫂 On this Valentine’s Day, I just want you to know how lucky I feel to have you in my life ❤️🫂😘, I love you sadhana 💖😘  `;
-
-      let currentIndex = 0;
-      let typingInterval = null;
-      let isPage2Active = false;
-
-      function typeNextCharacter() {
-        if (!isPage2Active) return;
-        
-        if (currentIndex < fullMessage.length) {
-          messageText.textContent += fullMessage.charAt(currentIndex);
-          currentIndex++;
-          
-          const typingDiv = document.getElementById('typingMessage');
-          typingDiv.scrollTop = typingDiv.scrollHeight;
-        } else {
-          clearInterval(typingInterval);
-          typingInterval = null;
-          cursor.style.opacity = '0';
-          signature.style.opacity = '1';
-        }
-      }
-
-      function startTyping() {
-        isPage2Active = true;
-        
-        if (currentIndex >= fullMessage.length) {
-          signature.style.opacity = '1';
-          cursor.style.opacity = '0';
-          return;
-        }
-        
-        if (typingInterval) {
-          clearInterval(typingInterval);
-        }
-        
-        typingInterval = setInterval(typeNextCharacter, 60);
-        cursor.style.opacity = '1';
-      }
-
-      function pauseTyping() {
-        isPage2Active = false;
-        if (typingInterval) {
-          clearInterval(typingInterval);
-          typingInterval = null;
-        }
-      }
-
       // ===== PHOTO UPLOAD FUNCTIONALITY =====
       window.triggerPhotoUpload = function(spotId) {
         const input = document.createElement('input');
@@ -866,11 +896,19 @@ window.onload = function () {
               
               switch(spotId) {
                 case 1:
-                  document.getElementById('page1Photo').src = imageUrl;
+                  updatePhoto('page1Photo', imageUrl);
                   break;
                 case 2:
-                  const heartFrame = document.getElementById('photoSpot2');
-                  heartFrame.innerHTML = `<img src="${imageUrl}" style="width:90%; height:90%; object-fit:cover; border-radius:50% 50% 45% 45%; border:3px solid white;">`;
+                  updateHeartPhoto(imageUrl);
+                  break;
+                case 3:
+                  updateThumb('thumb1', imageUrl);
+                  break;
+                case 4:
+                  updateThumb('thumb2', imageUrl);
+                  break;
+                case 5:
+                  updateThumb('thumb3', imageUrl);
                   break;
               }
             };
@@ -878,29 +916,49 @@ window.onload = function () {
           }
           document.body.removeChild(input);
         };
-        input.click();
+       
       };
 
-      // Hover sparkles on photos
+      function updatePhoto(elementId, imageUrl) {
+        const img = document.getElementById(elementId);
+        if (img) {
+          img.src = imageUrl;
+          img.style.display = 'block';
+        }
+      }
+
+      function updateHeartPhoto(imageUrl) {
+        const heartFrame = document.getElementById('photoSpot2');
+        heartFrame.innerHTML = `<img src="${imageUrl}" alt="Valentine photo" style="width:90%; height:90%; object-fit:cover; border-radius:50% 50% 45% 45%; border:3px solid white;">`;
+      }
+
+      function updateThumb(thumbId, imageUrl) {
+        const thumb = document.getElementById(thumbId);
+        if (thumb) {
+          thumb.parentElement.innerHTML = `<img src="${imageUrl}" alt="thumb" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`;
+        }
+      }
+
+      // Hover sparkle effect on photos
       const photoFrames = document.querySelectorAll('.photo-frame, .heart-photo-frame, .thumb-frame');
       photoFrames.forEach(frame => {
         frame.addEventListener('mouseenter', (e) => {
-          for (let i = 0; i < 3; i++) {
+          for (let i = 0; i < 5; i++) {
             const spark = document.createElement('span');
             spark.innerText = '✨';
             spark.style.position = 'absolute';
-            spark.style.left = e.pageX + (Math.random() - 0.5) * 30 + 'px';
-            spark.style.top = e.pageY + (Math.random() - 0.5) * 30 + 'px';
-            spark.style.fontSize = '1.2rem';
+            spark.style.left = e.pageX + (Math.random() - 0.5) * 40 + 'px';
+            spark.style.top = e.pageY + (Math.random() - 0.5) * 40 + 'px';
+            spark.style.fontSize = '1.5rem';
             spark.style.pointerEvents = 'none';
             spark.style.zIndex = '999';
             spark.style.transition = 'all 0.8s ease-out';
             document.body.appendChild(spark);
             setTimeout(() => {
-              spark.style.transform = `translate(${(Math.random() - 0.5) * 40}px, -20px) scale(0.1)`;
+              spark.style.transform = `translate(${(Math.random() - 0.5) * 60}px, -30px) scale(0.1)`;
               spark.style.opacity = '0';
             }, 10);
-            setTimeout(() => spark.remove(), 800);
+            setTimeout(() => spark.remove(), 900);
           }
         });
       });
@@ -914,70 +972,7 @@ window.onload = function () {
         }
       }, 500);
 
-      // Add click effect to thumbnails for visual feedback
-      document.querySelectorAll('.thumb-frame').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          // Add a quick scale animation for feedback
-          this.style.transform = 'scale(0.9)';
-          setTimeout(() => {
-            this.style.transform = '';
-          }, 200);
-        });
-      });
-
     })();
   </script>
-
-  <style>
-    /* Additional styles */
-    .typing-message {
-      background: rgba(255, 240, 245, 0.5);
-      transition: all 0.3s;
-      min-height: 280px;
-    }
-    
-    #signature {
-      transition: opacity 1.5s ease;
-    }
-    
-    .photo-frame, .heart-photo-frame, .thumb-frame {
-      cursor: pointer;
-      position: relative;
-    }
-        
-    .heart-photo-frame::after {
-      position: absolute;
-      bottom: -20px;
-      font-size: 1rem;
-      background: white;
-      padding: 2px 12px;
-      border-radius: 20px;
-      opacity: 0;
-      transition: 0.3s;
-      white-space: nowrap;
-    }
-    
-    .heart-photo-frame:hover::after {
-      opacity: 0.9;
-      bottom: -25px;
-    }
-    
-    /* Ensure flying emojis are above everything */
-    #flyingEmojiContainer {
-      pointer-events: none;
-      z-index: 10000;
-    }
-    
-    /* Thumbnail specific styles */
-    .thumb-frame {
-      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
-      animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 20px rgba(255, 105, 180, 0.5); }
-      50% { box-shadow: 0 0 30px rgba(255, 20, 147, 0.8); }
-    }
-  </style>
 </body>
 </html>
